@@ -1,18 +1,37 @@
-const fs = require('fs');
+/* TRABALHO 1 ANALIZADOR LÉXICO - COMPILADORES - PROF: JACQUELINE
+Author: Adrian Garcia Valdes
+Mátricula: 201620024
+
+Trabalho feito em javascript, utilizando o node para executar o codigo.
+Para executar basta no terminal (com nodejs ja instalado na máquina, podendo ser qualquer versão):
+    - node src/index.js -
+*/
+
+const fs = require('fs'); // Modulo para utilizar tratativas com arquivos de diferentes formatods
 
 // Definir os padrões de tokens usando expressões regulares
 const palavrasReservadas = ['programa', 'fim_programa', 'caso', 'entao', 'fim_caso', 'leia', 'def', 'imprima', 'return', '(', ')', '<', '-', ':']
 
 // Função para realizar a análise léxica
 function analisarLexico(codigo) {
-  let linha = 1;
   const tokens = [];
+  /* tokens é um Array onde se aramzena todos os tokens lidos no código.
+      no caso um array de objetos do tipo [
+        {
+          [tk_tipo_id]: valor_do_token;
+          tipo: tipo_de_token (aqui pode ser: palavraReservada ou simbolo)
+          linha: x, (linha onde a partir do primeiro caracter da palavra extraida)
+          coluna: y, (coluna onde a partir do primeiro caracter da palavra extraida)
+        }
+      ]
+  */
+  let linha = 1;
   const errors = [];
   let currentToken = '';
   let coluna = 1;
   let estado = 0;
-  let varError = false;
-  let colunaComment;
+  let varError = false; // Uma flag para dizer se o currentToken lido no momento é uma variável inválida ou não
+  let colunaComment;  //Uma variavel auxiliar para os casos do comentário pois caso seja comentarios de multiplas linha era necessário uma tratativa adicional
 
   function resetEstado() {
     estado = 0;
@@ -40,28 +59,29 @@ function analisarLexico(codigo) {
   }
 
   function isNumber(char) {
-    return !isNaN(parseInt(char));
+    return !isNaN(parseInt(char)); // Utiliza isNaN que basicamente é um metodo que vai retornar true ou false se o elemento verificado não é um numero
+    // isNaN = is Not a Number. Aplicando dentro de parseInt(char) ou seja pegando o char lido convertendo pra inteiro, caso n seja retornara NaN
   }
 
-  function isLetter(char) {
-    return /[a-zA-Z]/.test(char)
+  function isLetter(char) {        //Aqui utiliza-se um regex apegas para verificar se o char lido é uma letra maiuscula ou minuscula. aplicando o regex
+    return /[a-zA-Z]/.test(char)  // '/[a-zA-Z]/' no metodo test() que vai pegar esse regex e testar no char lido, retorno sendo true ou false
   }
 
   console.log('-------ARQUIVO DE PROGRAMA FICTICIO .CIC LIDO:--------\n');
-  console.log(codigo.split('\n').map((item, index) => `[${index + 1}]  ${item}`).join('\n'), '\n\n'); // Exibindo codigo lido no terminal
+  console.log(codigo.split('\n').map((item, index) => `[${index + 1}]  ${item}`).join('\n'), '\n\n'); // Exibindo código lido no terminal
 
   for (let cursor = 0; cursor < codigo.length; cursor++) {
     const char = codigo[cursor];
 
-    function moveCursorBack() {
-      if (codigo[cursor] === '\n') linha = linha - 1;
+    function moveCursorBack() {                         // Funçao que vai mover o cursor para um estado anterior e diminuindo o contador de coluna tbm pois se não teremos erro,
+      if (codigo[cursor] === '\n') linha = linha - 1;   // Caso aquele char naquele momento for um \n ele vai diminuir o numero de linha para evitar a contagem incorreta de linhas
       coluna--;
       cursor--;
     }
 
 
-    currentToken += char;
-    switch (estado) {
+    currentToken += char;  // Variavel q armazena o token lido atualmente;
+    switch (estado) {  // Aqui se testa para cada estado do automato feito.
       case 0:
         switch (char) {
           case '"':
@@ -498,7 +518,7 @@ function analisarLexico(codigo) {
 // Função principal
 function main() {
   try {
-    const codigo = fs.readFileSync(`src/${'ex_1.cic'}`, 'utf-8');
+    const codigo = fs.readFileSync(`src/${'ex_2.cic'}`, 'utf-8');
     analisarLexico(codigo);
   } catch (err) {
     console.log(err);
