@@ -1,0 +1,17 @@
+def __raiz__(n1):
+  imprime();
+  imprima();
+  teste <- +10/+2 // Teste tobias2
+  return n1*n1
+
+// Teste tobias
+
+//AOPKSDOKSAd
+
+programa
+  numero : número_1, raiz, teste_3
+  imprima("Digite um nro")
+  leia(numero)
+  raiz <- __raiz__(numero)
+  imprima(raiz)
+fim_programa

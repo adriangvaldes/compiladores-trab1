@@ -1,0 +1,17 @@
+def __test__():
+	num_real <- +0.14e-8
+	return num_real
+
+programa //Teste1
+numero: nota_1 
+	imprima("Digite 3 nros"
+	leia(n)
+	media <- __test__(nota_1, nota_1)
+	/* caso media >= 7 entao
+		 imprima(“aprovado”) 
+	fim_caso*/ imprima(média)
+	imprima("Uma cadeia bonita"+ "-10"++200)
+fim_programa
+
+
+

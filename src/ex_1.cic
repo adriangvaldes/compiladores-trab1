@@ -1,0 +1,10 @@
+programa
+	numero: nota_1, nota_2,nota_3 
+	imprima("Digite 3 nros")
+	leia(nota_1)
+	leia(nota_2)
+	leia(nota_3)
+	media <-   __media__(nota_1, nota_2, nota_3)
+	caso media >= 7 entao imprima("aprovado") fim_caso
+	imprima(media)
+fim_programa
