@@ -1,0 +1,27 @@
+BLOCO _principal_
+  NUMERO a = 10, b = 20
+  PRINT b
+  PRINT a
+  BLOCO _n1_
+    CADEIA a = “Compiladores”
+    NUMERO c
+    c=-0.45
+    PRINT b
+    PRINT c
+  FIM _n1_
+
+  BLOCO _n2_
+    CADEIA b = “Compiladores”
+    PRINT a
+    PRINT b
+    BLOCO _n3_
+      NUMERO a = -0.28, c=-0.38, d
+      PRINT a
+      PRINT b
+      PRINT c
+      d=”Compiladores”
+      PRINT d
+    FIM _n3_
+  FIM _n2_
+PRINT c
+FIM _principal_
